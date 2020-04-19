@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+
+<!-- config파일 작성 시 태그 순서를 지켜주세요 
+안지키면 에러남 
+
+properties?, 
+settings?, 
+typeAliases?, 
+typeHandlers?, 
+objectFactory?, 
+objectWrapperFactory?, 
+reflectorFactory?, 
+plugins?, 
+environments?,
+databaseIdProvider?, 
+mappers? 
+
+-->
+
+<typeAliases>
+<typeAlias type="com.update.semi.dto.SduserDto" alias="sduserDto"/>
+</typeAliases>
+
+<mappers>
+	<mapper resource="/mybatis/sduser-mapper.xml"/>
+</mappers>
+
+</configuration>
