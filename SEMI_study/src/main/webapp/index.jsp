@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="home.do">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</a>
+<a href="home.do">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</a><br/>
+<a href="joinform.do">회원가입</a>
+
 </body>
 </html>

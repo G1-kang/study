@@ -1,5 +1,7 @@
 package com.update.semi.biz;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +15,14 @@ public class SduserBizImpl implements SduserBiz{
 	private SduserDao dao;
 
 	@Override
-	public SduserDto selectOne(String sdueamil) {
-		// TODO Auto-generated method stub
-		return null;
+	public SduserDto emailCheck(String sduemail) {
+		
+		return dao.emailCheck(sduemail);
+	}
+
+	@Override
+	public int join(SduserDto dto) {
+		
+		return dao.join(dto);
 	}
 }

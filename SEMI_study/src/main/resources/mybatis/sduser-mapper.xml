@@ -4,7 +4,7 @@
 
 <resultMap type="sduserDto" id="sduserMap">
 	<result property="sduseq" column="SDUSEQ"/>
-	<result property="sdueamil" column="SDUEAMIL"/>
+	<result property="sduemail" column="SDUEMAIL"/>
 	<result property="sdupw" column="SDUPW"/>
 	<result property="sduname" column="SDUNAME"/>
 	<result property="sdusex" column="SDUSEX"/>
@@ -16,8 +16,14 @@
 	<result property="sduregdate" column="SDUREGDATE"/>
 </resultMap>
 
-<select id="selectOne" resultMap="sduserMap">
-select * from SDUSER where #{sdueamil}
+<select id="emailCheck" parameterType="String" resultMap="sduserDto">
+select SDUEMAIL from SDUSER where #{sduemail}
 </select>
+
+<insert id="join" parameterType="sduserDto">
+insert into SDUSER values(SDUSEQ.NEXTVAL,#{sduemail},#{sdupw},
+#{sduname},#{sdusex},#{sdunick},#{sdudob},'N','USER',NULL,SYSDATE);
+</insert>
+
 
 </mapper>

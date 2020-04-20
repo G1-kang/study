@@ -7,7 +7,7 @@ public class SduserDto {
     private int sduseq;
 
     // 아이디 
-    private String sdueamil;
+    private String sduemail;
 
     // 비번 
     private String sdupw;
@@ -44,7 +44,7 @@ public class SduserDto {
 			Date sdudob, String sdudeact, String sdugrade, Date sdudeactdate, Date sduregdate) {
 		super();
 		this.sduseq = sduseq;
-		this.sdueamil = sdueamil;
+		this.sduemail = sdueamil;
 		this.sdupw = sdupw;
 		this.sduname = sduname;
 		this.sdusex = sdusex;
@@ -65,11 +65,11 @@ public class SduserDto {
 	}
 
 	public String getSdueamil() {
-		return sdueamil;
+		return sduemail;
 	}
 
 	public void setSdueamil(String sdueamil) {
-		this.sdueamil = sdueamil;
+		this.sduemail = sdueamil;
 	}
 
 	public String getSdupw() {
@@ -146,7 +146,7 @@ public class SduserDto {
 
 	@Override
 	public String toString() {
-		return "SduserDto [sduseq=" + sduseq + ", sdueamil=" + sdueamil + ", sdupw=" + sdupw + ", sduname=" + sduname
+		return "SduserDto [sduseq=" + sduseq + ", sdueamil=" + sduemail + ", sdupw=" + sdupw + ", sduname=" + sduname
 				+ ", sdusex=" + sdusex + ", sdunick=" + sdunick + ", sdudob=" + sdudob + ", sdudeact=" + sdudeact
 				+ ", sdugrade=" + sdugrade + ", sdudeactdate=" + sdudeactdate + ", sduregdate=" + sduregdate + "]";
 	}
