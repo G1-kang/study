@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper  namespace="sduser">
+<mapper  namespace="com.update.semi.sduser">
 
 <resultMap type="sduserDto" id="sduserMap">
 	<result property="sduseq" column="SDUSEQ"/>
@@ -16,14 +16,16 @@
 	<result property="sduregdate" column="SDUREGDATE"/>
 </resultMap>
 
-<select id="emailCheck" parameterType="String" resultMap="sduserDto">
-select SDUEMAIL from SDUSER where #{sduemail}
+<select id="emailCheck" parameterType="String" resultMap="sduserMap">
+select SDUEMAIL from SDUSER where SDUEMAIL = #{sduemail}
 </select>
 
 <insert id="join" parameterType="sduserDto">
-insert into SDUSER values(SDUSEQ.NEXTVAL,#{sduemail},#{sdupw},
-#{sduname},#{sdusex},#{sdunick},#{sdudob},'N','USER',NULL,SYSDATE);
+insert into SDUSER values(SDUSEQ.NEXTVAL,#{sduemail},#{sdupw},#{sduname},#{sdusex},#{sdunick},TO_DATE(#{sdudob},'YYYY-MM-DD'),'N','USER',NULL,SYSDATE)
 </insert>
 
+<select id="login" parameterType="sduserDto" resultMap="sduserMap">
+select * from SDUSER where SDUEMAIL=#{sduemail} and SDUPW=#{sdupw}
+</select>
 
 </mapper>

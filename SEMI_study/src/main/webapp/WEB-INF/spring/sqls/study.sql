@@ -68,7 +68,8 @@ ALTER TABLE SDBOARD
 /
 
 --회원테이블
-DROP SEQUENCE SDUSEQ_SEQ;
+DROP SEQUENCE SDUSEQ;
+DROP table SDUSER CASCADE CONSTRAINTS;
 
 CREATE SEQUENCE SDUSEQ;
 
@@ -86,12 +87,22 @@ CREATE TABLE SDUSER
     SDUGRADE        VARCHAR2(20)     NULL, 
     SDUDEACTDATE    DATE             NULL, 
     SDUREGDATE      DATE             NULL, 
-    CONSTRAINT SDUSER_PK PRIMARY KEY (SDUEAMIL)
-)
+    CONSTRAINT SDUSER_PK PRIMARY KEY (SDUEMAIL)
+);
 
 select *from SDUSER;
+select SDUEMAIL from SDUSER where SDUEMAIL ='USER1@NAVER.COM' ;
 
-insert into SDUSER values(SDUSEQ.NEXTVAL,'USER1@NAVER.COM','1234','호이호','M','momo','2010-10-10','N','USER','2010-10-10',SYSDATE);
+insert into SDUSER values(SDUSEQ.NEXTVAL,'USER1@NAVER.COM','1234','호이호','M','momo',
+'2010-10-10','N','USER',NULL,SYSDATE);
+
+insert into SDUSER values(SDUSEQ.NEXTVAL,'user2@naver.com','1234','하이루','F','hoho',
+TO_DATE('20201010','YYYY-MM-DD'),'N','USER',NULL,SYSDATE);
+
+insert into SDUSER values(SDUSEQ.NEXTVAL,#{sduemail},#{sdupw},
+#{sduname},#{sdusex},#{sdunick},TO_DATE(#{sdudob},'YYYY-MM-DD'),'N','USER',NULL,SYSDATE);
+
+select * from SDUSER where SDUEMAIL='true@naver.com' and SDUPW='1111'
 
 --email 스펠링 틀린거 수정 
 --ALTER TABLE SDUSER RENAME COLUMN SDUEAMIL TO SDUEMAIL;

@@ -24,6 +24,14 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>	
 	
+	<!-- 클래스로 만든 메일 인증 부분  -->
+	<beans:bean id="SMTPDto" class="com.update.semi.dto.SMTPDto">
+		<beans:property name="host" value="smtp.naver.com" />
+		<beans:property name="password" value="833RHFPHR32V" />
+		<beans:property name="tail" value='@naver.com'/>
+		<beans:property name="user" value='anma55'/>
+	</beans:bean>
+	
 	<!-- logAop -->
    <aop:aspectj-autoproxy />
    <!-- 자동으로 AspectJ 라이브러리를 통해 Porxy객체를 생성한다 -->

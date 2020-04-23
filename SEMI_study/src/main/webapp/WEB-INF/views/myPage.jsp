@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="home.do">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</a><br/>
-<a href="joinform.do">회원가입</a><br/>
-<a href="main.do">메인</a>
+<h1>마이페이지</h1>
+<p>${member.sdunick }님의 마이페이지 입니다 </p>
+<input type="button" value="로그아웃" onclick="location.href='logout.do'">
 </body>
 </html>

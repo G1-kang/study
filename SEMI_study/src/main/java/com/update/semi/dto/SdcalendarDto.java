@@ -20,21 +20,21 @@ public class SdcalendarDto {
     private Date sdcenddate;
 
     // 아이디 일정 작성자
-    private String sdueamil;
+    private String sduemail;
 
 	public SdcalendarDto() {
 		
 	}
 
 	public SdcalendarDto(int sdcseq, String sdctitle, String sdccontent, Date sdcsartdate, Date sdcenddate,
-			String sdueamil) {
+			String sduemail) {
 		super();
 		this.sdcseq = sdcseq;
 		this.sdctitle = sdctitle;
 		this.sdccontent = sdccontent;
 		this.sdcsartdate = sdcsartdate;
 		this.sdcenddate = sdcenddate;
-		this.sdueamil = sdueamil;
+		this.sduemail = sduemail;
 	}
 
 	public int getSdcseq() {
@@ -77,18 +77,18 @@ public class SdcalendarDto {
 		this.sdcenddate = sdcenddate;
 	}
 
-	public String getSdueamil() {
-		return sdueamil;
+	public String getSduemail() {
+		return sduemail;
 	}
 
-	public void setSdueamil(String sdueamil) {
-		this.sdueamil = sdueamil;
+	public void setSduemail(String sduemail) {
+		this.sduemail = sduemail;
 	}
 
 	@Override
 	public String toString() {
 		return "SdcalendarDto [sdcseq=" + sdcseq + ", sdctitle=" + sdctitle + ", sdccontent=" + sdccontent
-				+ ", sdcsartdate=" + sdcsartdate + ", sdcenddate=" + sdcenddate + ", sdueamil=" + sdueamil + "]";
+				+ ", sdcsartdate=" + sdcsartdate + ", sdcenddate=" + sdcenddate + ", sduemail=" + sduemail + "]";
 	}
 	
 	

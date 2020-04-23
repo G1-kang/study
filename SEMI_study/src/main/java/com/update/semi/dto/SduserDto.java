@@ -22,7 +22,7 @@ public class SduserDto {
     private String sdunick;
 
     // 생년월일 
-    private Date sdudob;
+    private String sdudob;
 
     // 탈퇴여부 
     private String sdudeact;
@@ -40,11 +40,11 @@ public class SduserDto {
 		
 	}
 
-	public SduserDto(int sduseq, String sdueamil, String sdupw, String sduname, String sdusex, String sdunick,
-			Date sdudob, String sdudeact, String sdugrade, Date sdudeactdate, Date sduregdate) {
+	public SduserDto(int sduseq, String sduemail, String sdupw, String sduname, String sdusex, String sdunick,
+			String sdudob, String sdudeact, String sdugrade, Date sdudeactdate, Date sduregdate) {
 		super();
 		this.sduseq = sduseq;
-		this.sduemail = sdueamil;
+		this.sduemail = sduemail;
 		this.sdupw = sdupw;
 		this.sduname = sduname;
 		this.sdusex = sdusex;
@@ -64,12 +64,12 @@ public class SduserDto {
 		this.sduseq = sduseq;
 	}
 
-	public String getSdueamil() {
+	public String getSduemail() {
 		return sduemail;
 	}
 
-	public void setSdueamil(String sdueamil) {
-		this.sduemail = sdueamil;
+	public void setSduemail(String sduemail) {
+		this.sduemail = sduemail;
 	}
 
 	public String getSdupw() {
@@ -104,11 +104,11 @@ public class SduserDto {
 		this.sdunick = sdunick;
 	}
 
-	public Date getSdudob() {
+	public String getSdudob() {
 		return sdudob;
 	}
 
-	public void setSdudob(Date sdudob) {
+	public void setSdudob(String sdudob) {
 		this.sdudob = sdudob;
 	}
 

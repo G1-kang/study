@@ -16,7 +16,7 @@ public class SduserBizImpl implements SduserBiz{
 
 	@Override
 	public SduserDto emailCheck(String sduemail) {
-		
+		System.out.println("biz222222 : " + dao.emailCheck(sduemail));
 		return dao.emailCheck(sduemail);
 	}
 
@@ -25,4 +25,11 @@ public class SduserBizImpl implements SduserBiz{
 		
 		return dao.join(dto);
 	}
+
+	@Override
+	public SduserDto login(SduserDto dto) {
+		return dao.login(dto);
+	}
+
+
 }

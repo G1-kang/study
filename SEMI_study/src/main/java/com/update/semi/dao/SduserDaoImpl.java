@@ -20,15 +20,23 @@ public class SduserDaoImpl implements SduserDao {
 	//아이디 중복 체크 
 	@Override
 	public SduserDto emailCheck(String sduemail) {
-
-		SduserDto res = sqlSession.selectOne(NAMESPACE+"emailCheck",sduemail);
+		SduserDto res = null;
+		System.out.println("여기는 다오임플 1"+sduemail);//값이 들어옴 
+		
+		res = sqlSession.selectOne(NAMESPACE+"emailCheck",sduemail);
+		System.out.println("여기는 다오 임플 "+res);
+		
+		if(res == null) {
+			res = new SduserDto();
+		}
+		System.out.println("여기는 다오 임플2222 확ㅇ안해보자 다오 임플 :"+res);
 		return res;
 	}
 
-	//로그인 
+	//회원가입 
 	@Override
 	public int join(SduserDto dto) {
-		
+		System.out.println("여기는 회원가입 다오 : "+dto);
 		int res = 0;
 		try {
 			res = sqlSession.insert(NAMESPACE+"join",dto);
@@ -36,9 +44,19 @@ public class SduserDaoImpl implements SduserDao {
 			System.out.println("에러 - 회원가입 - 다오");
 			e.printStackTrace();
 		}
-		
 		return  res;
 	}
+
+	//로그인
+	@Override
+	public SduserDto login(SduserDto dto) {
+		
+		SduserDto logindto = null;
+		logindto = sqlSession.selectOne(NAMESPACE+"login",dto);
+		
+		return logindto;
+	}
+
 
 	
 }

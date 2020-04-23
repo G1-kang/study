@@ -22,7 +22,7 @@ public class SdboardDto {
 	    private String sdbtitle;
 
 	    // 아이디 글 작성자
-	    private String sdueamil;
+	    private String sduemail;
 
 	    // 글내용 
 	    private String sdub;
@@ -51,14 +51,14 @@ public class SdboardDto {
 		
 		
 
-		public SdboardDto(int sdbseq, int sdbtabno, int sdbgroupseq, int sdbgroupno, String sdbtitle, String sdueamil,
+		public SdboardDto(int sdbseq, int sdbtabno, int sdbgroupseq, int sdbgroupno, String sdbtitle, String sduemail,
 				String sdub, Date sdbregdate, int sdbviews, int sdblike, String sdbfilename, String sdbfilpath) {
 			this.sdbseq = sdbseq;
 			this.sdbtabno = sdbtabno;
 			this.sdbgroupseq = sdbgroupseq;
 			this.sdbgroupno = sdbgroupno;
 			this.sdbtitle = sdbtitle;
-			this.sdueamil = sdueamil;
+			this.sduemail = sduemail;
 			this.sdub = sdub;
 			this.sdbregdate = sdbregdate;
 			this.sdbviews = sdbviews;
@@ -109,12 +109,12 @@ public class SdboardDto {
 			this.sdbtitle = sdbtitle;
 		}
 
-		public String getSdueamil() {
-			return sdueamil;
+		public String getSduemail() {
+			return sduemail;
 		}
 
-		public void setSdueamil(String sdueamil) {
-			this.sdueamil = sdueamil;
+		public void setSduemail(String sduemail) {
+			this.sduemail = sduemail;
 		}
 
 		public String getSdub() {
@@ -170,7 +170,7 @@ public class SdboardDto {
 		@Override
 		public String toString() {
 			return "SdboardDto [sdbseq=" + sdbseq + ", sdbtabno=" + sdbtabno + ", sdbgroupseq=" + sdbgroupseq
-					+ ", sdbgroupno=" + sdbgroupno + ", sdbtitle=" + sdbtitle + ", sdueamil=" + sdueamil + ", sdub="
+					+ ", sdbgroupno=" + sdbgroupno + ", sdbtitle=" + sdbtitle + ", sduemail=" + sduemail + ", sdub="
 					+ sdub + ", sdbregdate=" + sdbregdate + ", sdbviews=" + sdbviews + ", sdblike=" + sdblike
 					+ ", sdbfilename=" + sdbfilename + ", sdbfilpath=" + sdbfilpath + "]";
 		}
