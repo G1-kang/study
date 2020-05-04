@@ -2,26 +2,38 @@ package com.update.semi.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class SduserDto {
-	  // 유저시퀀스 
+	
+	// 유저시퀀스 
     private int sduseq;
 
-    // 아이디 
+    // 아이디
+   // @Pattern(regexp = "^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$", message = "아이디는 이메일 형식으로 적어주세요")
     private String sduemail;
 
-    // 비번 
+    // 비번 : 숫자, 특문 각 1회 이상, 영문은 2개 이상 사용하여 8자리 이상 입력
+   // @Pattern(regexp = "(?=.*\\d{1,50})(?=.*[~`!@#$%\\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50}).{8,50}$", message = "숫자, 특문 각 1회 이상, 영문은 2개 이상 사용하여 8자리 이상 입력해주세요")
     private String sdupw;
 
     // 이름 
     private String sduname;
 
     // 성별 
+    @NotEmpty(message="하나이상 체크해 주세요")
+    @Pattern(regexp ="^(F)|(M)$", message = "성별 하나만 설정해 주세요")
     private String sdusex;
 
-    // 닉네임 
+    // 닉네임 : 한글과 영문만 가능 
+    @NotEmpty(message="사용하실 닉네임을 적어 주세요")
+    @Pattern(regexp = "^[가-힣a-zA-Z]+$", message = "한글과 영문만 가능 합니다")
     private String sdunick;
 
-    // 생년월일 
+    // 생년월일 :yyyymmdd 형태로
+    @Pattern(regexp = "^(19[0-9][0-9]|20[0-9][0-9])(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$", message ="20101015의 형식으로 작성해 주세요 ")
     private String sdudob;
 
     // 탈퇴여부 

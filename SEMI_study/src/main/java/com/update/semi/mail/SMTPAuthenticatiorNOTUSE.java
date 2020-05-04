@@ -3,7 +3,7 @@ package com.update.semi.mail;
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
 
-public class SMTPAuthenticatior extends Authenticator{
+public class SMTPAuthenticatiorNOTUSE extends Authenticator{
 
 	@Override
 	protected PasswordAuthentication getPasswordAuthentication() {

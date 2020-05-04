@@ -34,6 +34,7 @@ public class SMTPDto {
 	private String user; 
 	private String tail; 
 	private String password;
+	// 위의 필드속성은 servlet-content.xml에서 di/ioc를 통하여 값을 가져온다
 	
 	public String getHost() {
 		return host;
@@ -64,9 +65,13 @@ public class SMTPDto {
 	}
 	
 	private Properties props = System.getProperties();
+	   // {java.runtime.name=Java(TM) SE Runtime Environment, sun.boot.library.path=C:\Program Files\Java\jdk1.8.0_221\jre\bin, java.vm.version=25.221-b11 ....
+	   // System.getProperties();에는 위와같은 정보가 들어있음
+	   
+	
 	
 	private boolean setEnv() {
-		props.put("mail.smtp.host", host);
+		props.put("mail.smtp.host", host);// 메일 전송을 처리해줄 서버 
 		props.put("mail.smtp.psrt", port);
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.enable", "true");
@@ -87,11 +92,11 @@ public class SMTPDto {
 
 		//파일과 함께 전송
 		public boolean sendMail(String receiver,String title, String text, String filePath, String fileName) throws Exception{
-			setEnv();
-			Message msg = sendingHead();
-			sendingBody(msg, receiver, title, text);
+			setEnv(); // 1) 인증에 사용될 전역변수 프로퍼티 설정
+			Message msg = sendingHead();  // 2) 프로퍼티를 사용하여 메일 인증 및 메세지 작성에 사용되는 클래스 생성
+			sendingBody(msg, receiver, title, text);  // 3) 메세지 작성에 사용되는 클래스에 전송할 텍스트 메세지 작성
 			
-			if(filePath != null && filePath.length() > 0){  
+			if(filePath != null && filePath.length() > 0){    // 4) 파일 추가
 		        Multipart multipart = new MimeMultipart();
 		        MimeBodyPart textBodyPart = new MimeBodyPart();
 		        textBodyPart.setText(text,"UTF-8");
@@ -103,7 +108,7 @@ public class SMTPDto {
 		        multipart.addBodyPart(attachmentBodyPart); // add the attachement part
 		        msg.setContent(multipart);			
 			}	
-			Transport.send(msg);	
+			Transport.send(msg);	  // 5) 전송
 	        return true;
 		}
 		
@@ -112,7 +117,7 @@ public class SMTPDto {
 			
 			//인증번호 생성 
 			//MimeMessage 세션을 생성한 뒤 메세지 작성할 때 
-			StringBuffer temp = new StringBuffer();
+			StringBuffer temp = new StringBuffer();//String은 값이 고정적일때, buffer은 값이 유동적일때 사용한다 
 			Random rnd = new Random();
 			for(int i =0; i < 10; i++) {
 				int rIndex = rnd.nextInt(3); 
@@ -137,37 +142,57 @@ public class SMTPDto {
 
 		//인증번호 전송 
 		public boolean sendAuthNo(String receiver, String temp) throws Exception {
-			
-			setEnv();
-			Message msg = sendingHead();//발신자 로그인 정보를 담아준다-발신자, 수신자, 제목을 세팅하기 위하여 msg생성 
+			 // System.getProperties();를 통해 가져온 properties에 추가정보를 담는다. 
+			setEnv();  // 1) 설정에 사용되는 전역변수 props를 설정한다.
+			Message msg = sendingHead();  // 2) 프로퍼티를 사용하여 메일 인증 및 메세지 작성에 사용되는 클래스 생성
+										//발신자 로그인 정보를 담아준다-발신자, 수신자, 제목을 세팅하기 위하여 msg생성 
 			
 			
 			//메일제목
 			msg.setSubject("안녕하세요 study의 인증 메일입니다");
 			//메일내용
-			msg.setText("인증번호는 : "+temp+"\n"+"를 입력해 주세요");
+			msg.setText("인증번호는 : "+temp+"\n"+"를 입력해 주세요");// 3) 메세지 내용 작성    
 			//발신자 셋팅 , 보내는 사람의 이메일주소를 한번 더 입력합니다. 이때는 이메일 풀 주소를 다 작성해주세요.
 			msg.setFrom(new InternetAddress(user + tail));  
 			//수신자셋팅
 			msg.setRecipient(Message.RecipientType.TO, new InternetAddress(receiver));   
 			
-			Transport.send(msg); //메세지 전송 
+			Transport.send(msg); // 4) 메세지 전송 
 			return true;
 		}
 		
+		//발신자 메일 주소 및 비밀번호 설정 하기 ->2중잠금 설정의 경우 (모바일 인증번호 발송시 ) 따로 비밀번호를 설정하여 그것을 불러와야함 
+		//appServlet안에 context.xml을 만들거나 기본적으로 있는 servlet-context.xml에다가 beans 혹은 bean을 입력해 발신자 정보를 입력
+		// sendingHead 메서드 : 메일 인증 설정 및 메세지 작성 객체 생성
+	      // 1) 프로퍼티스를 통해 javax.mail.Session을 생성
+	      // 2) 생성된 session을 바인딩하여 메세지를 추가하고 메일 전송에 사용되는 클래스를 리턴한다.  
 		private Message sendingHead(){
+			 // 발신자 메일 주소 및 비밀번호 설정 하기 ->2중잠금 설정의 경우 (모바일 인증번호 발송시 ) 따로 비밀번호를 설정하여 그것을 불러와야함
 			Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+			      /* 
+			       # 코드 설명 
+			          1) javax.mail.Session : 메일 API에서 사용되는 특성과 기본값을 함께 수집합니다, 단일 기본 세션은 데스크톱의 여러 응용 프로그램에서 공유 할 수 있습니다
+			          2) Session.getDefaultInstance(프로퍼티스, 새로운 인증관련 클래스) : 프로퍼티스를 이용하여 새로운 인증객체를 생성하며, 해당 메서드는 새로운 객체를 생성시에만 프로퍼티스를 사용하여 설정값을 사용한다. 
+			          3) props : 설정정보가 들어있는 전역변수
+			          4) new javax.mail.Authenticator() : 네트워크 연결에 대한 인증을 얻는 방법을 구현한 클래스의 메서드
+			      */
+				
+				  // 이너클래스의 필드속성 : new javax.mail.Authenticator()의 필드속성(전역변수)
 				String un = user;
 				String pw = password;
+				
+				// 이너클래스의 메서드 : 인증에 사용할 아이디 비번 설정
 				protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+					 // javax.mail.PasswordAuthentication :  Authenticator에서 사용하는 데이터 저장소입니다. 단순히 사용자 이름과 비밀번호를 저장하는 저장소입니다.
 					return new javax.mail.PasswordAuthentication(un, pw);
 				}
-			});
+			}); // 이너클래스 끝 : new javax.mail.Authenticator() 생성 끝
 			session.setDebug(true); //for debug  
 			Message msg = new MimeMessage(session); //MimeMessage 생성 
 			return msg;
 		}
 
+		//수신자의 주소와 수신자에게 보내야하는 내용들을 세팅
 		private void sendingBody(Message msg, String receiver, String title, String text) throws Exception{
 			msg.setFrom(new InternetAddress(user + tail)); //발신자 셋팅 , 보내는 사람의 이메일주소를 한번 더 입력합니다. 이때는 이메일 풀 주소를 다 작성해주세요.  
 			msg.setRecipient(Message.RecipientType.TO, new InternetAddress(receiver)); //수신자셋팅  

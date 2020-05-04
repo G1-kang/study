@@ -16,4 +16,13 @@ public interface SduserDao {
 	
 	//로그인 
 	public SduserDto login(SduserDto dto);
+	
+	//아이디 회원가입 되어있는지 확인 하기 위해 정보 갖고오기 
+	public SduserDto snsemailchk(String sduemail);
+	
+	//자기 정보 수정 
+	public int updatemypage(SduserDto dto);
+	
+	
+
 }

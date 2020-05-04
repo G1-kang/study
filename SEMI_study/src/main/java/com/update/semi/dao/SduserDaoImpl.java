@@ -33,7 +33,7 @@ public class SduserDaoImpl implements SduserDao {
 		return res;
 	}
 
-	//회원가입 
+	//회원가입 , sns포함 
 	@Override
 	public int join(SduserDto dto) {
 		System.out.println("여기는 회원가입 다오 : "+dto);
@@ -57,6 +57,26 @@ public class SduserDaoImpl implements SduserDao {
 		return logindto;
 	}
 
+	//sns회원가입 전에 회원가입되어있는지 확인
+	@Override
+	public SduserDto snsemailchk(String sduemail) {
+		SduserDto snsemailchk = null; 
+		snsemailchk = sqlSession.selectOne(NAMESPACE+"snsemailchk",sduemail);
+		
+		return snsemailchk;
+	}
+
+	//정보 페이지 업데이트 
+	@Override
+	public int updatemypage(SduserDto dto) {
+		int res = 0; 
+		res = sqlSession.update(NAMESPACE+"updatemypage",dto);
+		
+		return res;
+	}
+
+
+	
 
 	
 }

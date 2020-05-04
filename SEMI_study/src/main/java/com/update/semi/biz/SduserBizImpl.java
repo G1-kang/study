@@ -31,5 +31,16 @@ public class SduserBizImpl implements SduserBiz{
 		return dao.login(dto);
 	}
 
+	@Override
+	public SduserDto snsemailchk(String sduemail) {
+		return dao.emailCheck(sduemail);
+	}
+
+	@Override
+	public int updatemypage(SduserDto dto) {
+		return dao.updatemypage(dto);
+	}
+
+
 
 }

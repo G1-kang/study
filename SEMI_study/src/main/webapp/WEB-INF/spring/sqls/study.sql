@@ -91,7 +91,7 @@ CREATE TABLE SDUSER
 );
 
 select *from SDUSER;
-select SDUEMAIL from SDUSER where SDUEMAIL ='USER1@NAVER.COM' ;
+select * from SDUSER where SDUEMAIL ='user3@naver.com' ;
 
 insert into SDUSER values(SDUSEQ.NEXTVAL,'USER1@NAVER.COM','1234','호이호','M','momo',
 '2010-10-10','N','USER',NULL,SYSDATE);
@@ -102,7 +102,13 @@ TO_DATE('20201010','YYYY-MM-DD'),'N','USER',NULL,SYSDATE);
 insert into SDUSER values(SDUSEQ.NEXTVAL,#{sduemail},#{sdupw},
 #{sduname},#{sdusex},#{sdunick},TO_DATE(#{sdudob},'YYYY-MM-DD'),'N','USER',NULL,SYSDATE);
 
+DELETE FROM SDUSER where SDUEMAIL='iroyuroy@gmail.com'
+
 select * from SDUSER where SDUEMAIL='true@naver.com' and SDUPW='1111'
+
+update SDUSER set SDUNAME='강아지',SDUSEX='F',SDUNICK='멍멍',SDUDOB=TO_DATE('20201220','YYYY-MM-DD')
+where SDUEMAIL = 'user3@naver.com'
+
 
 --email 스펠링 틀린거 수정 
 --ALTER TABLE SDUSER RENAME COLUMN SDUEAMIL TO SDUEMAIL;

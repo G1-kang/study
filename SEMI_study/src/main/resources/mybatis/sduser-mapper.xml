@@ -25,7 +25,21 @@ insert into SDUSER values(SDUSEQ.NEXTVAL,#{sduemail},#{sdupw},#{sduname},#{sduse
 </insert>
 
 <select id="login" parameterType="sduserDto" resultMap="sduserMap">
-select * from SDUSER where SDUEMAIL=#{sduemail} and SDUPW=#{sdupw}
+select SDUSEQ,SDUEMAIL,SDUPW,SDUNAME,SDUSEX,SDUNICK,TO_CHAR(SDUDOB, 'YYYY-MM-DD') SDUDOB from SDUSER where SDUEMAIL=#{sduemail} and SDUPW=#{sdupw} and SDUDEACT='N'
 </select>
+
+<select id="snsemailchk">
+select SDUEMAIL from SDUSER where SDUEMAIL=#{sduemail} and SDUDEACT='N'
+</select>
+
+<update id="updatemypage" parameterType="sduserDto">
+update SDUSER set SDUNAME=#{sduname},SDUSEX=#{sdusex},SDUNICK=#{sdunick},SDUDOB=TO_DATE(#{sdudob},'YYYY-MM-DD')
+where SDUEMAIL = #{sduemail}
+</update>
+
+<select id="selectOne" parameterType="String">
+select SDUSEQ,SDUEMAIL,SDUPW,SDUNAME,SDUSEX,SDUNICK,TO_CHAR(SDUDOB, 'YYYY-MM-DD') from SDUSER where SDUEMAIL=#{sduemail} 
+</select>
+
 
 </mapper>
