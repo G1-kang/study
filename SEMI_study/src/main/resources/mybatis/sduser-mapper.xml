@@ -14,6 +14,7 @@
 	<result property="sdugrade" column="SDUGRADE"/>
 	<result property="sdudeactdate" column="SDUDEACTDATE"/>
 	<result property="sduregdate" column="SDUREGDATE"/>
+	<result property="sduimgpath" column="SDUIMGPATH"/>
 </resultMap>
 
 <select id="emailCheck" parameterType="String" resultMap="sduserMap">
@@ -25,7 +26,7 @@ insert into SDUSER values(SDUSEQ.NEXTVAL,#{sduemail},#{sdupw},#{sduname},#{sduse
 </insert>
 
 <select id="login" parameterType="sduserDto" resultMap="sduserMap">
-select SDUSEQ,SDUEMAIL,SDUPW,SDUNAME,SDUSEX,SDUNICK,TO_CHAR(SDUDOB, 'YYYY-MM-DD') SDUDOB from SDUSER where SDUEMAIL=#{sduemail} and SDUPW=#{sdupw} and SDUDEACT='N'
+select SDUSEQ,SDUEMAIL,SDUPW,SDUNAME,SDUSEX,SDUNICK,TO_CHAR(SDUDOB, 'YYYY-MM-DD') SDUDOB ,SDUIMGPATH from SDUSER where SDUEMAIL=#{sduemail} and SDUPW=#{sdupw} and SDUDEACT='N'
 </select>
 
 <select id="snsemailchk">
@@ -33,12 +34,12 @@ select SDUEMAIL from SDUSER where SDUEMAIL=#{sduemail} and SDUDEACT='N'
 </select>
 
 <update id="updatemypage" parameterType="sduserDto">
-update SDUSER set SDUNAME=#{sduname},SDUSEX=#{sdusex},SDUNICK=#{sdunick},SDUDOB=TO_DATE(#{sdudob},'YYYY-MM-DD')
+update SDUSER set SDUNAME=#{sduname},SDUSEX=#{sdusex},SDUNICK=#{sdunick},SDUDOB=TO_DATE(#{sdudob},'YYYY-MM-DD'),SDUIMGPATH=#{sduimgpath}
 where SDUEMAIL = #{sduemail}
 </update>
 
-<select id="selectOne" parameterType="String">
-select SDUSEQ,SDUEMAIL,SDUPW,SDUNAME,SDUSEX,SDUNICK,TO_CHAR(SDUDOB, 'YYYY-MM-DD') from SDUSER where SDUEMAIL=#{sduemail} 
+<select id="selectOne" parameterType="String" resultMap="sduserMap">
+select SDUSEQ,SDUEMAIL,SDUPW,SDUNAME,SDUSEX,SDUNICK,TO_CHAR(SDUDOB, 'YYYY-MM-DD') SDUDOB, SDUIMGPATH from SDUSER where SDUEMAIL=#{sduemail} 
 </select>
 
 

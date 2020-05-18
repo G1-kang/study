@@ -75,6 +75,15 @@ public class SduserDaoImpl implements SduserDao {
 		return res;
 	}
 
+	@Override
+	public SduserDto selectOne(String sduemail) {
+
+		SduserDto userdto = null; 
+		userdto = sqlSession.selectOne(NAMESPACE+"selectOne",sduemail);
+		
+		return userdto;
+	}
+
 
 	
 

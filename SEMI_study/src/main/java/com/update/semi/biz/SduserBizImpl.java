@@ -41,6 +41,11 @@ public class SduserBizImpl implements SduserBiz{
 		return dao.updatemypage(dto);
 	}
 
+	@Override
+	public SduserDto selectOne(String sduemail) {
+		return dao.selectOne(sduemail);
+	}
+
 
 
 }

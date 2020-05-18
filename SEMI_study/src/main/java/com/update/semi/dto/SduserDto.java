@@ -1,10 +1,12 @@
 package com.update.semi.dto;
 
+import java.io.File;
 import java.util.Date;
 
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.web.multipart.MultipartFile;
 
 public class SduserDto {
 	
@@ -47,13 +49,20 @@ public class SduserDto {
 
     // 가입날짜 
     private Date sduregdate;
+    
+    //회원 이미지 
+    private String sduimgpath;
 
+    //파일 
+    private MultipartFile userImgFile;
+
+    
 	public SduserDto() {
 		
 	}
 
 	public SduserDto(int sduseq, String sduemail, String sdupw, String sduname, String sdusex, String sdunick,
-			String sdudob, String sdudeact, String sdugrade, Date sdudeactdate, Date sduregdate) {
+			String sdudob, String sdudeact, String sdugrade, Date sdudeactdate, Date sduregdate,String sduimgpath,MultipartFile userImgFile) {
 		super();
 		this.sduseq = sduseq;
 		this.sduemail = sduemail;
@@ -66,6 +75,8 @@ public class SduserDto {
 		this.sdugrade = sdugrade;
 		this.sdudeactdate = sdudeactdate;
 		this.sduregdate = sduregdate;
+		this.sduimgpath = sduimgpath;
+		this.userImgFile = userImgFile;
 	}
 
 	public int getSduseq() {
@@ -155,12 +166,30 @@ public class SduserDto {
 	public void setSduregdate(Date sduregdate) {
 		this.sduregdate = sduregdate;
 	}
+	
+
+	public String getSduimgpath() {
+		return sduimgpath;
+	}
+
+	public void setSduimgpath(String sduimgpath) {
+		this.sduimgpath = sduimgpath;
+	}
+
+	public MultipartFile getUserImgFile() {
+		return userImgFile;
+	}
+
+	public void setUserImgFile(MultipartFile userImgFile) {
+		this.userImgFile = userImgFile;
+	}
 
 	@Override
 	public String toString() {
-		return "SduserDto [sduseq=" + sduseq + ", sdueamil=" + sduemail + ", sdupw=" + sdupw + ", sduname=" + sduname
+		return "SduserDto [sduseq=" + sduseq + ", sduemail=" + sduemail + ", sdupw=" + sdupw + ", sduname=" + sduname
 				+ ", sdusex=" + sdusex + ", sdunick=" + sdunick + ", sdudob=" + sdudob + ", sdudeact=" + sdudeact
-				+ ", sdugrade=" + sdugrade + ", sdudeactdate=" + sdudeactdate + ", sduregdate=" + sduregdate + "]";
+				+ ", sdugrade=" + sdugrade + ", sdudeactdate=" + sdudeactdate + ", sduregdate=" + sduregdate
+				+ ", sduimgpath=" + sduimgpath + ", userImgFile=" + userImgFile + "]";
 	}
 	
 	

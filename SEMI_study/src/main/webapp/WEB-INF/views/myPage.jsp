@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <script type="text/javascript"src="${pageContext.request.contextPath}/resources/JS/logout.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/JS/mypage.js"></script>
+
 <title>Insert title here</title>
 </head>
 <%@include file ="/WEB-INF/views/logout.jsp" %>
@@ -17,6 +19,22 @@
 
 	<div id="updatebefore">
 			<table>
+				<tr>
+					<td colspan="2" align="center" >
+						<c:choose>
+							<c:when test="${empty member.sduimgpath}">
+								
+								<img src="${pageContext.request.contextPath}/resources/IMG/defualtperson.PNG" width="200" height="200">
+							</c:when>
+						<c:otherwise>
+								<img src="${member.sduimgpath}" width="200" height="200" >
+								
+						</c:otherwise>
+						</c:choose>
+					
+					</td>
+				</tr>
+				
 				<tr>
 					<th>아이디</th>
 					<td>

@@ -26,6 +26,7 @@
 			<param-value>
 				/WEB-INF/spring/appServlet/servlet-context.xml
 				/WEB-INF/spring/appServlet/message-context.xml
+				/WEB-INF/spring/appServlet/fileupload.xml
 			</param-value>
 			
 		</init-param>

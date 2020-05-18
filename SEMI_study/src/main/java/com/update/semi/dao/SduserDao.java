@@ -23,6 +23,8 @@ public interface SduserDao {
 	//자기 정보 수정 
 	public int updatemypage(SduserDto dto);
 	
+	//정보 수정한뒤 정보 뽑아 올 때 
+	public SduserDto selectOne(String sduemail);
 	
 
 }

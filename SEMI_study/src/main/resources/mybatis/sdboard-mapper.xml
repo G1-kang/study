@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.update.semi.sdboard">
+
+<resultMap type="sdboardDto" id="sduserMap">
+	<result property="sdbseq" column="SDBSEQ"/>
+	<result property="sdbtabno" column="SDBTABNO"/>
+	<result property="sdbgroupseq" column="SDBGROUPSEQ"/>
+	<result property="sdbgroupno" column="SDBGROUPNO"/>
+	<result property="sdbtitle" column="SDBTITLE"/>
+	<result property="sduemail" column="SDUEMAIL"/>
+	<result property="sdubcontent" column="SDUBCONTENT"/>
+	<result property="sdbregdate" column="SDBREGDATE"/>
+	<result property="sdbviews" column="SDBVIEWS"/>
+	<result property="sdblike" column="SDBLIKE"/>
+	<result property="sdbfilename" column="SDBFILENAME"/>
+	<result property="sdbfilpath" column="SDBFILPATH"/>
+	<result property="sdbimgname" column="SDBIMGNAME"/>
+	<result property="sdbimgpath" column="SDBIMGPATH"/>
+	<result property="sdunick" column="SDUNICK"/>
+</resultMap>
+
+<select id="selectList" resultMap="sduserMap">
+select *  from SDBOARD
+</select>
+
+<select id="selectOne" resultMap="sduserMap">
+select * from SDBOARD where SDBSEQ = #{sdbseq}
+</select>
+
+<insert id="insertwrite" parameterType="sdboardDto">
+insert into SDBOARD(SDBSEQ,SDBTITLE,SDUEMAIL,SDUNICK,SDUBCONTENT,SDBREGDATE,SDBFILENAME,SDBFILPATH,SDBIMGNAME,SDBIMGPATH) 
+values(SDBSEQ.NEXTVAL,#{sdbtitle},#{sduemail},#{sdunick},#{sdubcontent},SYSDATE,#{sdbfilename},#{sdbfilpath},#{sdbimgname},#{sdbimgpath})
+</insert>
+
+<update id="updatewrite">
+update SDBOARD set SDBTITLE=#{sdbtitle},SDUBCONTENT=#{sdubcontent},SDBFILENAME=#{sdbfilename},
+SDBFILPATH=#{sdbfilpath},SDBIMGNAME=#{sdbimgname},SDBIMGPATH=#{sdbimgpath}
+where SDBSEQ =#{sdbseq}
+</update>
+
+
+<delete id="deletewrite" parameterType="int">
+delete from SDBOARD where SDBSEQ =#{sdbseq}
+</delete>
+
+</mapper>

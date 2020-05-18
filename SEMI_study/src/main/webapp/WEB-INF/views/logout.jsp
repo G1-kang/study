@@ -21,11 +21,11 @@
 <body>
 	<div>
 		<span>|</span>
-		<a href="login.do">마이페이지</a>
-		<a href="#">글목록</a>
+		<a href="mypage.do">마이페이지</a>
+		<a href="boardlist.do">글목록</a>
 		<a href="#">달력</a>
 		<span>|</span>
-		<a onclick="logoutGo();">로그아웃</a>
+		<a href="#" onclick="logoutGo();">로그아웃</a>
 	</div>	
 </body>
 </html>
