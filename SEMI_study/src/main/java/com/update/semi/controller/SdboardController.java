@@ -57,8 +57,9 @@ public class SdboardController {
 
 	// 글 목록 페이지로
 	@RequestMapping(value = "/boardlist.do", method = RequestMethod.GET)
-	public String boardlist(Model model, HttpSession session) {
+	public String boardlist(Model model, HttpSession session, @ModelAttribute SdboardDto sdboarddto, @RequestParam(defaultValue = "1") int cuttentPage) {
 
+		logger.info("board list page >>>>>>[input]sdboarddto"+sdboarddto);
 		SduserDto login = (SduserDto) session.getAttribute("member");
 		System.out.println("여긴 게시판 로그인 세션을 가져옴 " + login);
 
@@ -73,6 +74,9 @@ public class SdboardController {
 
 		return "boardlist";
 	}
+	
+
+	
 
 	/*
 	// 글 상세보기
@@ -456,6 +460,9 @@ public class SdboardController {
 
 		return "boardupdate";
 	}
+	
+	
+	
 	
 
 }

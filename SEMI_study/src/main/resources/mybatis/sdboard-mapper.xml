@@ -17,6 +17,7 @@
 	<result property="sdbimgpath" column="SDBIMGPATH"/>
 	<result property="sdunick" column="SDUNICK"/>
 	<result property="thumbnail" column="THUMBNAIL"/>
+	
 </resultMap>
 
 <select id="selectList" resultMap="sduserMap">
@@ -60,5 +61,34 @@ where SDBSEQ =#{sdbseq}
 <delete id="deletewrite" parameterType="int">
 delete from SDBOARD where SDBSEQ =#{sdbseq}
 </delete>
+
+<select id="rnlist" parameterType="sdboardDto">
+SELECT X.RN, X.SDBSEQ, X.SDUNICK, X.SDBTITLE, X.SDBREGDATE
+FROM (
+	SELECT ROWNUM AS RN, A.SDBSEQ, A.SDUNICK, A.SDBTITLE, A.SDBREGDATE
+	FROM (
+		SELECT SDBSEQ, SDUNICK, SDBTITLE, SDBREGDATE
+		FROM SDBOARD
+		ORDER BY SDBSEQ DESC) A
+	WHERE ROWNUM <![CDATA[<=]]> #{endCount }	
+	)X	
+WHERE X.RN >= #{startCount }
+</select>
+
+<select id="getTotalBoard" resultType="int">
+SELECT COUNT(*)
+FROM SDBOARD
+<trim prefix="WHERE" prefixOverrides="AND">
+<if test="category == 'title' and keyword != null and kyword != ''">
+AND SDBTITLE LIKE ('%' || #{keyword} || '%')
+</if>
+<if test="category == 'content' and keyword != null and keyword != ''">
+AND SDUBCONTENT LIKE ('%'|| #{keyword} ||'%')
+</if>
+<if test="category == 'nick' and keyword != null and keyword != ''">
+AND SDUNICK LIKE ('%'|| #{keyword} ||'%')
+</if>
+</trim>
+</select>
 
 </mapper>

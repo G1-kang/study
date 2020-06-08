@@ -19,7 +19,7 @@ console.log('${msg}'+'내용이 나와야한다');
 
     $(function(){
     	alert("'" + <%=msg%> + "'");
-    	
+    	 
     	
         var responseMessage = $('#msg').val();
         if(responseMessage != ""){
