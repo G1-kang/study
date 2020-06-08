@@ -22,3 +22,14 @@
             border: 1px solid #888;
             inline-size: max-content;                  
         }
+/*
+class로 짠 것을 수정 하고 싶을때 
+class를 감싸고 있는 큰 div나 상위 버전의 것의 id를 불러와서 쓴다 
+#div의 id .class{적용할 내용}
+이런식으로 사용하면 오버라이드를 사용 할 수 있다 
+
+적용 레벨 
+100 id
+10 태그
+1 class
+*/

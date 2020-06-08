@@ -71,8 +71,6 @@ $(function () {
 		<span>${updatedto.sdbregdate }</span>
 		</p>
 		<textarea id="summernote" name="sdubcontent"></textarea>
-		<input type="hidden" name="sdbimgname" value=null>
-		<input type="hidden" name="sdbimgpath" value=null>
 	
 	
 	<table border="1">
@@ -97,7 +95,7 @@ $(function () {
 	</tr>
 </table>
 		<input type="submit" value="수정하기"/>
-		<input type="button" value="목록으로"/>
+		<input type="button" value="목록으로" onclick="location.href='boardlist.do'"/>
 </form>
 </div>
 </div>

@@ -17,4 +17,13 @@ public interface SdboardBiz {
 	//글 삭제 
 	public int delete(int sdbseq); 
 	
+	//이미지 넣기 
+	public int insertImg(SdboardDto sdboarddto);
+	//이미지 넣고 보드 넘버를 가지고 오기 
+	public String getBoardNo(SdboardDto sdboarddto);
+	//db에 글추가 하기 
+	public int insertNoImgBoard(SdboardDto sdboarddto);
+	//db에 글 수정하기 
+	public int updateRestContent(SdboardDto sdboarddto);
+	
 }

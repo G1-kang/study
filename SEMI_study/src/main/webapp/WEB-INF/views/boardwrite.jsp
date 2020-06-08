@@ -10,35 +10,9 @@
 <link href="${pageContext.request.contextPath}/resources/CSS/summernote-lite.min.css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/resources/JS/summernote/summernote-lite.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/JS/summernote/summernote-ko-KR.min.js"></script>
-
-<script type="text/javascript">
-$(function () {
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/JS/boardwrite.js"></script>
 
 
-	$('#summernote').summernote({
-	    placeholder: '내용을 적어주세요',
-	    tabsize: 2,
-	    height: 120,
-	    width:650,
-	    toolbar: [
-	      ['style', ['style']],
-	      ['font', ['bold', 'underline', 'clear']],
-	      ['color', ['color']],
-	      ['para', ['ul', 'ol', 'paragraph']],
-	      ['table', ['table']],
-	      ['insert', ['link', 'picture', 'video']],
-	      ['view', ['fullscreen', 'codeview', 'help']]
-	    ]
-	  });
-	
-
-
-	
-});
-
-
-
-</script>
 
 </head>
 <body>
@@ -52,8 +26,8 @@ $(function () {
 <div id="menu" style="background-color:#EEEEEE;height:700px;width:20%;float:left;">
 
 <div style="margin-left: 20px; margin-top: 10px; width: 100%">
-<a href="allwrite.do">전체 글</a><br>
-<a href="main.do">내글 보기 </a><br>
+<a href="boardlist.do">전체 글</a><br>
+<a href="#">내글 보기 </a><br>
 </div>
 
 </div>
@@ -62,18 +36,21 @@ $(function () {
 <div style="margin-left: 40px; margin-top: 40px; margin-bottom: 40px;">
 글쓰기 
 
-<form action="boardwriteres.do" method="post">
-<input type="text" value="${member.sdunick }" name="sdunick">
-<input type="text" value="${member.sduemail }" name="sduemail">
+<form action="boardwriteres.do" method="post" enctype="multipart/form-data">
+<input type="hidden" name="sdubcontent">
+<input type="hidden" id="sdbseq" name="sdbseq" value="0">
+
+<input type="text" value="${member.sdunick }" name="sdunick" readonly="readonly">
+<input type="text" value="${member.sduemail }" name="sduemail" readonly="readonly">
 		<p>
 		<span>제목</span>
 		<span>
-			<input type="text" name="sdbtitle">
+			<input type="text" name="sdbtitle" id="sdbtitle">
 		</span>
 		</p>
-		<textarea id="summernote" name="sdubcontent"></textarea>
-		<input type="hidden" name="sdbimgname" value=null>
-		<input type="hidden" name="sdbimgpath" value=null>
+		<textarea id="summernote"></textarea>
+
+		
 	<table border="1">
 	<col width="150px">
 	<col width="300px">
@@ -82,15 +59,15 @@ $(function () {
 		<th>첨부 파일</th>
 		<td>첨부파일 목록 ~</td>
 		<td>
-			<input type="button" value="첨부하기">
-			<input type="hidden" name="sdbfilename" value=null>
-			<input type="hidden" name="sdbfilpath" value=null>
+			<input type="file" multiple="multiple" name="file">
 		</td>
 	</tr>
 
 </table>
-		<input type="submit" value="글쓰기" />
+		<!-- sumbit이 boardwrite.js안에 들어 있음 -->
+		<input type="button" value="글쓰기" onclick="AjaxFileUpload();"/>
 		<input type="button" value="목록으로" onclick="location.href='boardlist.do'"/>
+		<input type="submit" id="submit" style="display: none" value="submit"/>
 </form>
 </div>
 </div>

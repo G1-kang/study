@@ -43,5 +43,28 @@ public class SdboardBizImpl implements SdboardBiz{
 	public int delete(int sdbseq) {
 		return dao.delete(sdbseq);
 	}
+
+	@Override
+	public int insertImg(SdboardDto sdboarddto) {
+		return dao.insertImg(sdboarddto);
+				
+	}
+
+	@Override
+	public String getBoardNo(SdboardDto sdboarddto) {
+		String sdbseq = Integer.toString(dao.getBoardNo(sdboarddto));
+		return sdbseq;
+	}
+
+	@Override
+	public int insertNoImgBoard(SdboardDto sdboarddto) {
+		System.out.println("글 추가 Biz >>>>>>>>>>>>>>>>> " + sdboarddto);
+		return dao.insertNoImgBoard(sdboarddto);
+	}
+
+	@Override
+	public int updateRestContent(SdboardDto sdboarddto) {
+		return dao.updateRestContent(sdboarddto);
+	}
 	
 }

@@ -61,6 +61,40 @@ public class SdboardDaoImpl implements SdboardDao{
 		
 		return res;
 	}
+
+	//이미지 넣기
+	@Override
+	public int insertImg(SdboardDto sdboarddto) {
+		int res = 0; 
+		res = sqlSession.insert(NAMESPACE+"insertImg",sdboarddto);
+		return res;
+	}
+
+	//이미지 넣고 보드 넘버를 가지고 오기
+	@Override
+	public int getBoardNo(SdboardDto sdboarddto) {
+		int sdbseq = 0; 
+		sdbseq = sqlSession.selectOne(NAMESPACE+"getBoardNo",sdboarddto);
+		return sdbseq;
+	}
+
+	//db에 글추가 하기
+	@Override
+	public int insertNoImgBoard(SdboardDto sdboarddto) {
+		System.out.println("글 추가 bao >>>>>>>>>>>>>>>>> " + sdboarddto);
+		int res =0 ; 
+		res = sqlSession.insert(NAMESPACE+"insertNoImgBoard",sdboarddto);
+		
+		return res;
+	}
+
+	//db에 글 수정하기
+	@Override
+	public int updateRestContent(SdboardDto sdboarddto) {
+		int res = 0; 
+		res = sqlSession.update(NAMESPACE+"updateRestContent",sdboarddto);
+		return res;
+	}
 	
 
 }

@@ -12,6 +12,17 @@
    <bean class="java.lang.String" id="uploadPath">
     <constructor-arg value="C:\GIT\study\SEMI_study\src\main\webapp\resources\IMG\userimg" />
    </bean>
+   
+   <!-- 게시판 이미지 패스 설정 --> 
+   <bean class="java.lang.String" id="boardImgPath">
+    <constructor-arg value="C:\GIT\study\SEMI_study\src\main\webapp\resources\IMG\board\img" />
+   </bean>
+
+   <!-- 게시판 첨부파일 패스 설정 --> 
+   <bean class="java.lang.String" id="boardFilePath">
+    <constructor-arg value="C:\GIT\study\SEMI_study\src\main\webapp\resources\file" />
+   </bean>
+
 
    <!-- 파일 업로드 -->      
    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

@@ -1,0 +1,40 @@
+#menu {
+	background-color: #EEEEEE;
+	height: 800px;
+	width: 20%;
+	float: left;
+}
+
+#content {
+	background-color: white-space;
+	height: 800px;
+	width: 80%;
+	float: left;
+}
+
+#content_body {
+	margin-left: 40px;
+	margin-top: 40px;
+	margin-bottom: 0px;
+}
+
+#content_top {
+	height: 30%;
+}
+
+#content_btm {
+	height: 65%;
+}
+
+#sdubcontent{
+	 /*height 100%로 바꾸기 ~ 내용물들 menu랑 content 하나의div으로 묶기 */
+	height: 478px;
+	overflow: scroll;
+}
+
+#footer {
+	background-color: #CE9FFC;
+	clear: both;
+	text-align: center;
+	height: 5%;
+}

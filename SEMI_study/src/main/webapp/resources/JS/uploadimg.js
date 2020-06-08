@@ -43,6 +43,7 @@ function imgUpload() {
       // 새로운 img태그
       let profileImg = document.createElement("img")
       profileImg.setAttribute("id", "userImg")
+      profileImg.setAttribute("style", "width:300px;")
       
       /* #5 파일을 다 읽었을때 loadend 이벤트가 발생 >>> 이후 return 발생한다. */
       return function(event) {

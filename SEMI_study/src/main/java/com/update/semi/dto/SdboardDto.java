@@ -1,10 +1,11 @@
 package com.update.semi.dto;
 
+import java.util.Arrays;
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class SdboardDto {
-
-
 
 	    // 글시퀀스 
 	    private int sdbseq;
@@ -42,8 +43,6 @@ public class SdboardDto {
 	    // 파일경로 
 	    private String sdbfilpath;
 
-	    //이미지 파일 이름 
-	    private String sdbimgname;
 	    
 	    //이미지 파일 경로
 	    private String sdbimgpath;
@@ -51,13 +50,21 @@ public class SdboardDto {
 	    //닉네임 
 	    private String sdunick;
 	    
+	    //파일 배열 로 받기 
+	    private MultipartFile[] file;
+	    
+	    //썸네일 이미지 받아오기 
+	    private String thumbnail;
+	    
 		public SdboardDto() {
 			
 		}
 
+
+
 		public SdboardDto(int sdbseq, int sdbtabno, int sdbgroupseq, int sdbgroupno, String sdbtitle, String sduemail,
-				String sdubcontent, Date sdbregdate, int sdbviews, int sdblike, String sdbfilename, String sdbfilpath,
-				String sdbimgname, String sdbimgpath, String sdunick) {
+				String sdubcontent, Date sdbregdate, int sdbviews, int sdblike, String sdbfilpath,
+				 String sdbimgpath, String sdunick, MultipartFile[] file, String thumbnail) {
 			super();
 			this.sdbseq = sdbseq;
 			this.sdbtabno = sdbtabno;
@@ -69,12 +76,13 @@ public class SdboardDto {
 			this.sdbregdate = sdbregdate;
 			this.sdbviews = sdbviews;
 			this.sdblike = sdblike;
-			this.sdbfilename = sdbfilename;
 			this.sdbfilpath = sdbfilpath;
-			this.sdbimgname = sdbimgname;
 			this.sdbimgpath = sdbimgpath;
 			this.sdunick = sdunick;
+			this.file = file;
+			this.thumbnail = thumbnail;
 		}
+
 
 
 
@@ -84,20 +92,16 @@ public class SdboardDto {
 
 
 
+		public MultipartFile[] getFile() {
+			return file;
+		}
+
+		public void setFile(MultipartFile[] file) {
+			this.file = file;
+		}
+
 		public void setSdubcontent(String sdubcontent) {
 			this.sdubcontent = sdubcontent;
-		}
-
-
-
-		public String getSdbimgname() {
-			return sdbimgname;
-		}
-
-
-
-		public void setSdbimgname(String sdbimgname) {
-			this.sdbimgname = sdbimgname;
 		}
 
 
@@ -188,13 +192,6 @@ public class SdboardDto {
 			this.sdblike = sdblike;
 		}
 
-		public String getSdbfilename() {
-			return sdbfilename;
-		}
-
-		public void setSdbfilename(String sdbfilename) {
-			this.sdbfilename = sdbfilename;
-		}
 
 		public String getSdbfilpath() {
 			return sdbfilpath;
@@ -213,14 +210,23 @@ public class SdboardDto {
 		public void setSdunick(String sdunick) {
 			this.sdunick = sdunick;
 		}
+		
+		public String getThumbnail() {
+			return thumbnail;
+		}
+
+		public void setThumbnail(String thumbnail) {
+			this.thumbnail = thumbnail;
+		}
 
 		@Override
 		public String toString() {
 			return "SdboardDto [sdbseq=" + sdbseq + ", sdbtabno=" + sdbtabno + ", sdbgroupseq=" + sdbgroupseq
 					+ ", sdbgroupno=" + sdbgroupno + ", sdbtitle=" + sdbtitle + ", sduemail=" + sduemail
 					+ ", sdubcontent=" + sdubcontent + ", sdbregdate=" + sdbregdate + ", sdbviews=" + sdbviews
-					+ ", sdblike=" + sdblike + ", sdbfilename=" + sdbfilename + ", sdbfilpath=" + sdbfilpath
-					+ ", sdbimgname=" + sdbimgname + ", sdbimgpath=" + sdbimgpath + ", sdunick=" + sdunick + "]";
+					+ ", sdblike=" + sdblike + ", sdbfilpath=" + sdbfilpath
+					 + ", sdbimgpath=" + sdbimgpath + ", sdunick=" + sdunick + ", file="
+					+ Arrays.toString(file) + ", thumbnail=" + thumbnail + "]";
 		}
 
 		

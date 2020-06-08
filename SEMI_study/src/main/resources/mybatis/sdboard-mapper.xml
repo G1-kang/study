@@ -13,29 +13,46 @@
 	<result property="sdbregdate" column="SDBREGDATE"/>
 	<result property="sdbviews" column="SDBVIEWS"/>
 	<result property="sdblike" column="SDBLIKE"/>
-	<result property="sdbfilename" column="SDBFILENAME"/>
 	<result property="sdbfilpath" column="SDBFILPATH"/>
-	<result property="sdbimgname" column="SDBIMGNAME"/>
 	<result property="sdbimgpath" column="SDBIMGPATH"/>
 	<result property="sdunick" column="SDUNICK"/>
+	<result property="thumbnail" column="THUMBNAIL"/>
 </resultMap>
 
 <select id="selectList" resultMap="sduserMap">
-select *  from SDBOARD
+select *  from SDBOARD ORDER BY SDBSEQ DESC
 </select>
 
 <select id="selectOne" resultMap="sduserMap">
 select * from SDBOARD where SDBSEQ = #{sdbseq}
 </select>
 
+<select id="getBoardNo" resultType="int">
+select SDBSEQ from SDBOARD where SDUEMAIL=#{sduemail} and THUMBNAIL=#{thumbnail}
+</select>
+
 <insert id="insertwrite" parameterType="sdboardDto">
-insert into SDBOARD(SDBSEQ,SDBTITLE,SDUEMAIL,SDUNICK,SDUBCONTENT,SDBREGDATE,SDBFILENAME,SDBFILPATH,SDBIMGNAME,SDBIMGPATH) 
-values(SDBSEQ.NEXTVAL,#{sdbtitle},#{sduemail},#{sdunick},#{sdubcontent},SYSDATE,#{sdbfilename},#{sdbfilpath},#{sdbimgname},#{sdbimgpath})
+insert into SDBOARD(SDBSEQ,SDBTITLE,SDUEMAIL,SDUNICK,SDUBCONTENT,SDBREGDATE,SDBFILPATH,SDBIMGPATH,THUMBNAIL) 
+values(SDBSEQ.NEXTVAL,#{sdbtitle},#{sduemail},#{sdunick},#{sdubcontent},SYSDATE,#{sdbfilpath},#{sdbimgpath},#{thumbnail})
 </insert>
 
+<insert id="insertImg" parameterType="sdboardDto">
+insert into SDBOARD(SDBSEQ,SDUEMAIL,SDUNICK,SDBIMGPATH,THUMBNAIL) 
+values(SDBSEQ.NEXTVAL,#{sduemail},#{sdunick},#{sdbimgpath},#{thumbnail})
+</insert>
+
+<insert id="insertNoImgBoard" parameterType="sdboardDto">
+insert into SDBOARD(SDBSEQ,SDBTITLE,SDUEMAIL,SDUNICK,SDUBCONTENT,SDBREGDATE,SDBFILPATH,SDBIMGPATH,THUMBNAIL,SDBTABNO,SDBGROUPSEQ,SDBGROUPNO,SDBVIEWS,SDBLIKE) 
+values(SDBSEQ.NEXTVAL,#{sdbtitle},#{sduemail},#{sdunick},#{sdubcontent},SYSDATE,#{sdbfilpath},null,null,0,0,0,0,0)
+</insert>
+
+<update id="updateRestContent" parameterType="sdboardDto">
+update SDBOARD set SDBTITLE=#{sdbtitle},SDUBCONTENT=#{sdubcontent},SDBFILPATH=#{sdbfilpath} 
+where SDBSEQ =#{sdbseq}
+</update>
+
 <update id="updatewrite">
-update SDBOARD set SDBTITLE=#{sdbtitle},SDUBCONTENT=#{sdubcontent},SDBFILENAME=#{sdbfilename},
-SDBFILPATH=#{sdbfilpath},SDBIMGNAME=#{sdbimgname},SDBIMGPATH=#{sdbimgpath}
+update SDBOARD set SDBTITLE=#{sdbtitle},SDUBCONTENT=#{sdubcontent},SDBFILPATH=#{sdbfilpath},SDBIMGPATH=#{sdbimgpath}
 where SDBSEQ =#{sdbseq}
 </update>
 

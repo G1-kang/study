@@ -15,7 +15,7 @@
 %>
 <script>
 
-console.log('<c:out value="${msg}" />'+'내용이 나와야한다');
+console.log('${msg}'+'내용이 나와야한다');
 
     $(function(){
     	alert("'" + <%=msg%> + "'");
