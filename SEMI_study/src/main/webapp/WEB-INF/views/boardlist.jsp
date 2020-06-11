@@ -27,6 +27,7 @@ console.log('${msg}'+'내용이 나와야한다');
             alert(responseMessage);
         }
     });
+ 
 </script>
 
 </head>
@@ -53,6 +54,16 @@ console.log('${msg}'+'내용이 나와야한다');
 <div style="margin-left: 40px; margin-top: 40px; margin-bottom: 40px;">
 글 목록
 
+	<form action="/boardlist.do" method="get">
+		<label>글 검색 :</label>
+		<select name="category" id="category">
+			<option value="sdbtitle">제목</option>
+			<option value="sdubcontent">제목</option>
+			<option value="sdunick">제목</option>
+		</select>
+		<input type="text" size="20">
+		<input type="submit" value="검색하기">
+	</form>
 	
 	<table border="1">
 	<col width="100px">

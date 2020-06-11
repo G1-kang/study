@@ -62,33 +62,54 @@ where SDBSEQ =#{sdbseq}
 delete from SDBOARD where SDBSEQ =#{sdbseq}
 </delete>
 
-<select id="rnlist" parameterType="sdboardDto">
-SELECT X.RN, X.SDBSEQ, X.SDUNICK, X.SDBTITLE, X.SDBREGDATE
-FROM (
-	SELECT ROWNUM AS RN, A.SDBSEQ, A.SDUNICK, A.SDBTITLE, A.SDBREGDATE
-	FROM (
-		SELECT SDBSEQ, SDUNICK, SDBTITLE, SDBREGDATE
-		FROM SDBOARD
-		ORDER BY SDBSEQ DESC) A
-	WHERE ROWNUM <![CDATA[<=]]> #{endCount }	
-	)X	
-WHERE X.RN >= #{startCount }
-</select>
 
+<!-- 전체 게시물 구하기 + 검색후 전체 게시물 구하기-->
 <select id="getTotalBoard" resultType="int">
 SELECT COUNT(*)
 FROM SDBOARD
 <trim prefix="WHERE" prefixOverrides="AND">
-<if test="category == 'title' and keyword != null and kyword != ''">
+<if test="category == 'sdbtitle' and keyword != null and kyword != ''">
 AND SDBTITLE LIKE ('%' || #{keyword} || '%')
 </if>
-<if test="category == 'content' and keyword != null and keyword != ''">
+<if test="category == 'sdubcontent' and keyword != null and keyword != ''">
 AND SDUBCONTENT LIKE ('%'|| #{keyword} ||'%')
 </if>
-<if test="category == 'nick' and keyword != null and keyword != ''">
+<if test="category == 'sdunick' and keyword != null and keyword != ''">
 AND SDUNICK LIKE ('%'|| #{keyword} ||'%')
 </if>
 </trim>
 </select>
+
+
+ <!-- 전체 가져오기  + 페이징 + 검색  -->
+   <!--
+      # <trim>
+      1.prefix 처리 후 엘리먼트의 내용이 있으면 가장 앞에 붙여준다.
+      2.prefixOverrides 처리 후 엘리먼트 내용 중 가장 앞에 해당 문자들이 있다면 자동으로 지워준다.
+      3.suffix 처리 후 엘리먼트 내에 내용이 있으면 가장 뒤에 붙여준다.
+      4.suffixOverrides 처리 후 엘리먼트 내용 중 가장 뒤에 해당 문자들이 있다면 자동으로 지워준다.
+   -->
+   <select id="boardList" parameterType="sdboardDto" resultMap="sduserMap">
+      SELECT X.RN, X.SDBSEQ, X.SDUNICK, X.SDBTITLE, X.SDBREGDATE, X.SDBLIKE, X.SDBVIEWS
+      FROM(
+         SELECT ROWNUM as RN, A.SDBSEQ, A.SDUNICK, A.SDBTITLE, A.SDBREGDATE, A.SDBLIKE, A.SDBVIEWS
+         FROM (
+            SELECT SDBSEQ, SDUNICK, SDBTITLE, SDBREGDATE, SDBLIKE, SDBVIEWS
+            FROM SDBOARD
+               <trim prefix = "WHERE" prefixOverrides = "AND">
+                  <if test="category == 'sdbtitle' and keyword != null and keyword != ''">
+                     AND SDBTITLE LIKE ('%' || #{keyword} || '%')
+                  </if>
+                  <if test="category == 'sdubcontent' and keyword != null and keyword != ''">
+                     AND SDUBCONTENT LIKE ('%' || #{keyword} || '%')
+                  </if>
+                  <if test="category == 'sdunick' and keyword != null and keyword != ''">
+                     AND SDUNICK LIKE ('%' || #{keyword} || '%')
+                  </if>
+               </trim>
+            ORDER BY SDBSEQ DESC) A
+         WHERE ROWNUM <![CDATA[<=]]> #{endBoardNo}) X
+      WHERE X.RN >= #{startBoardNo}   
+   </select>
 
 </mapper>

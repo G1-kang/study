@@ -62,7 +62,20 @@ public class SdboardController {
 		logger.info("board list page >>>>>>[input]sdboarddto"+sdboarddto);
 		SduserDto login = (SduserDto) session.getAttribute("member");
 		System.out.println("여긴 게시판 로그인 세션을 가져옴 " + login);
-
+		
+		//1)전체 게시물 개수 가져오기 
+	      //int totalBoardCount = boardBiz.getTotalBoard(dto);   // 전체게시물 수  or 검색한 게시물 수
+	      
+	      /*2) 페이징 클래스 >> 쿼리에 필요한 시작페이지 번호, 끝 페이지 번호를 계산해서 가지고 있음  */
+	      //OraclePagination pagination = new OraclePagination(totalBoardCount, currentPage);   // 전체 게시물 수, 현재 페이지 (== 요청된 페이지) 
+	      //logger.info("board main page >>>>>>>>>>>>>>> [페이징] OraclePagination : " + pagination );
+	      
+	      
+	      //3) boardDto에 시작 페이지, 끝 페이지 추가
+	      //dto.setStartBoardNo(pagination.getStartBoardNo());
+	      //dto.setEndBoardNo(pagination.getEndBoardNo());
+		
+		
 		List<SdboardDto> boardlist = sdboardbiz.list();
 		System.out.println("여긴 게시판 컨트롤러 " + boardlist);
 
@@ -71,7 +84,10 @@ public class SdboardController {
 		// session.getAttribute("sduserdto");
 		// logger.info("보드페이지로 갔을때 전달되는 값:"+session.getAttribute("sduserdto"));
 		// 값이 null !!!
-
+		//페이징 처리가 된 값들 리턴해야함 
+		/*	      model.addAttribute("list", list);
+	      model.addAttribute("pagination", pagination);
+	      return "board/BOARD_BoardMain";*/
 		return "boardlist";
 	}
 	
