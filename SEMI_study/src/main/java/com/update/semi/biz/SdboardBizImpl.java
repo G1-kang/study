@@ -66,5 +66,17 @@ public class SdboardBizImpl implements SdboardBiz{
 	public int updateRestContent(SdboardDto sdboarddto) {
 		return dao.updateRestContent(sdboarddto);
 	}
+
+	@Override
+	public int getTotalBoard(SdboardDto sdboarddto) {
+		logger.info("페이징 페이지 수  biz "+sdboarddto);
+		return dao.getTotalBoard(sdboarddto);
+	}
+
+	@Override
+	public List<SdboardDto> boardList(SdboardDto sdboarddto) {
+		logger.info("페이징 list biz "+sdboarddto);
+		return dao.boardList(sdboarddto);
+	}
 	
 }

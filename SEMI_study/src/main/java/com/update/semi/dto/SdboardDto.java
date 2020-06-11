@@ -64,38 +64,16 @@ public class SdboardDto {
 	    
 	    //검색할 주제, 내용
 	    private String category; 
-	    private String keyword; 
+
+		private String keyword; 
 
 
 
 
-
-
-
-	
-		public SdboardDto(int sdbseq, int sdbtabno, int sdbgroupseq, int sdbgroupno, String sdbtitle, String sduemail,
-				String sdubcontent, Date sdbregdate, int sdbviews, int sdblike, String sdbfilename, String sdbfilpath,
-				String sdbimgpath, String sdunick, MultipartFile[] file, String thumbnail, int endCount,
-				int startCount) {
-			this.sdbseq = sdbseq;
-			this.sdbtabno = sdbtabno;
-			this.sdbgroupseq = sdbgroupseq;
-			this.sdbgroupno = sdbgroupno;
-			this.sdbtitle = sdbtitle;
-			this.sduemail = sduemail;
-			this.sdubcontent = sdubcontent;
-			this.sdbregdate = sdbregdate;
-			this.sdbviews = sdbviews;
-			this.sdblike = sdblike;
-			this.sdbfilename = sdbfilename;
-			this.sdbfilpath = sdbfilpath;
-			this.sdbimgpath = sdbimgpath;
-			this.sdunick = sdunick;
-			this.file = file;
-			this.thumbnail = thumbnail;
-			this.endCount = endCount;
-			this.startCount = startCount;
+		public SdboardDto() {
+			
 		}
+
 
 		public SdboardDto(int sdbseq, int sdbtabno, int sdbgroupseq, int sdbgroupno, String sdbtitle, String sduemail,
 				String sdubcontent, Date sdbregdate, int sdbviews, int sdblike, String sdbfilename, String sdbfilpath,
@@ -126,9 +104,11 @@ public class SdboardDto {
 
 
 
+
 		public int getEndCount() {
 			return endCount;
 		}
+
 
 
 
@@ -296,9 +276,18 @@ public class SdboardDto {
 
 
 
-		public SdboardDto() {
-			
+
+
+	    public String getCategory() {
+			return category;
 		}
+
+		public void setCategory(String category) {
+			this.category = category;
+		}
+
+
+
 
 
 

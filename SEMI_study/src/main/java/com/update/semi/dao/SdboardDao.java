@@ -27,4 +27,8 @@ public interface SdboardDao {
 	//db에 글 수정하기 
 	public int updateRestContent(SdboardDto sdboarddto);
 	
+	//페이징 
+	public int getTotalBoard(SdboardDto sdboarddto);
+	public List<SdboardDto> boardList(SdboardDto sdboarddto);
+	
 }

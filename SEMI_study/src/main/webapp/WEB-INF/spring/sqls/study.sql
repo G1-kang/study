@@ -116,8 +116,26 @@ FROM (
 	)X	
 WHERE X.RN >= 1--#{startCount }
 
+--한번에 100개 더미 만들기 (이클립스에서 loop문이 돌지 않음 ㅠㅠ 디비버로 가능하다고 함...왜지 내꺼만 안되나 싶은디 일단 패수 )
+DECLARE v_cnt NUMBER := 1;
 
-
+BEGIN
+   LOOP
+       EXIT WHEN v_cnt = 100;
+         INSERT INTO SDBOARD(SDBSEQ ,SDUEMAIL, SDUNICK, SDBTITLE, SDUBCONTENT, SDBREGDATE, SDBLIKE, SDBFILPATH, SDBIMGPATH, THUMBNAIL) 
+         VALUES(SDBSEQ.NEXTVAL,'user1@naver.com', '호호', '반복추가:'||to_char(v_cnt), '글내용', SYSDATE, ROUND(DBMS_RANDOM.VALUE (1, 100)), null, null, null);
+         v_cnt := v_cnt+1
+   END LOOP;
+END;
+/
+-- 
+BEGIN
+FOR i IN 1..100 LOOP
+INSERT INTO SDBOARD(SDBSEQ,SDUEMAIL, SDUNICK, SDBTITLE, SDUBCONTENT, SDBREGDATE, SDBLIKE, SDBFILPATH, SDBIMGPATH, THUMBNAIL) 
+VALUES(SDBSEQ.NEXTVAL,'user1@naver.com', '호호', '반복추가:'||to_char(v_cnt), '글내용', SYSDATE, ROUND(DBMS_RANDOM.VALUE (1, 100)), null, null, null);
+END LOOP;
+END;
+--
 
 /
 
@@ -210,6 +228,10 @@ select * from SDUSER where SDUEMAIL='true@naver.com' and SDUPW='1111'
 
 update SDUSER set SDUNAME='강아지',SDUSEX='F',SDUNICK='멍멍',SDUDOB=TO_DATE('20201220','YYYY-MM-DD')
 where SDUEMAIL = 'user3@naver.com'
+
+
+
+
 
 
 --email 스펠링 틀린거 수정 

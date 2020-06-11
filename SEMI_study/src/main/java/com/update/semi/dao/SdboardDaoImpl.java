@@ -1,5 +1,6 @@
 package com.update.semi.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -81,7 +82,6 @@ public class SdboardDaoImpl implements SdboardDao{
 	//db에 글추가 하기
 	@Override
 	public int insertNoImgBoard(SdboardDto sdboarddto) {
-		System.out.println("글 추가 bao >>>>>>>>>>>>>>>>> " + sdboarddto);
 		int res =0 ; 
 		res = sqlSession.insert(NAMESPACE+"insertNoImgBoard",sdboarddto);
 		
@@ -94,6 +94,24 @@ public class SdboardDaoImpl implements SdboardDao{
 		int res = 0; 
 		res = sqlSession.update(NAMESPACE+"updateRestContent",sdboarddto);
 		return res;
+	}
+
+	@Override
+	public int getTotalBoard(SdboardDto sdboarddto) {
+		logger.info("페이징 페이지 수  biz "+sdboarddto);
+		int res = 0; 
+		res = sqlSession.selectOne(NAMESPACE+"getTotalBoard", sdboarddto);
+		
+		return res;
+	}
+
+	@Override
+	public List<SdboardDto> boardList(SdboardDto sdboarddto) {
+		logger.info("페이징 list dao "+sdboarddto);
+		List<SdboardDto> boardlist = null; 
+		boardlist = sqlSession.selectList(NAMESPACE+"boardList",sdboarddto);
+		
+		return boardlist;
 	}
 	
 
