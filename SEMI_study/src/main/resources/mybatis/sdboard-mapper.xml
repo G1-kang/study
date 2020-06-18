@@ -52,11 +52,20 @@ update SDBOARD set SDBTITLE=#{sdbtitle},SDUBCONTENT=#{sdubcontent},SDBFILPATH=#{
 where SDBSEQ =#{sdbseq}
 </update>
 
-<update id="updatewrite">
-update SDBOARD set SDBTITLE=#{sdbtitle},SDUBCONTENT=#{sdubcontent},SDBFILPATH=#{sdbfilpath},SDBIMGPATH=#{sdbimgpath}
-where SDBSEQ =#{sdbseq}
+<update id="updateBoard">
+update SDBOARD set SDBTITLE=#{sdbtitle},SDUBCONTENT=#{sdubcontent},SDBFILPATH=#{sdbfilpath},SDBIMGPATH=#{sdbimgpath},THUMBNAIL=#{thumbnail}, SDBREGDATE=#{sdbregdate}
+where SDUEMAIL=#{sduemail} and SDBSEQ =#{sdbseq}
 </update>
 
+<update id="updateImg" parameterType="sdboardDto">
+update SDBOARD set SDBIMGPATH=#{sdbimgpath},THUMBNAIL=#{thumbnail} 
+where SDUEMAIL=#{sduemail} and SDBSEQ=#{sdbseq}
+</update>
+
+<update id="updateNoImgBoard">
+update SDBOARD set SDBTITLE=#{sdbtitle},SDUBCONTENT=#{sdubcontent},SDBFILPATH=#{sdbfilpath},SDBIMGPATH="",THUMBNAIL="", SDBREGDATE=#{sdbregdate}
+where SDUEMAIL=#{sduemail} and SDBSEQ=#{sdbseq}
+</update>
 
 <delete id="deletewrite" parameterType="int">
 delete from SDBOARD where SDBSEQ =#{sdbseq}

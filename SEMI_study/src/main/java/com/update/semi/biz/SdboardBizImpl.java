@@ -78,5 +78,23 @@ public class SdboardBizImpl implements SdboardBiz{
 		logger.info("페이징 list biz "+sdboarddto);
 		return dao.boardList(sdboarddto);
 	}
+
+	@Override
+	public int updateImg(SdboardDto sdboardDto) {
+		logger.info("이미지 업데이트 biz dto:"+sdboardDto);
+		return dao.updateImg(sdboardDto);
+	}
+
+	@Override
+	public int updateNoImgBoard(SdboardDto sdboardDto) {
+		logger.info("updateNoImgBoard biz sdboardDto :"+sdboardDto);
+		return dao.updateNoImgBoard(sdboardDto);
+	}
+
+	@Override
+	public int updateBoard(SdboardDto sdboardDto) {
+		logger.info("updateBoard biz :"+sdboardDto);
+		return dao.updateBoard(sdboardDto);
+	}
 	
 }

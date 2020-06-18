@@ -25,6 +25,13 @@ public interface SdboardBiz {
 	public int insertNoImgBoard(SdboardDto sdboarddto);
 	//db에 글 수정하기 
 	public int updateRestContent(SdboardDto sdboarddto);
+	//이미지 수정 
+	public int updateImg(SdboardDto sdboardDto);
+	//글내용 안에 이미지 없을 경우 주소 없애기 
+	public int updateNoImgBoard(SdboardDto sdboardDto);
+	//글이미지 있을 경우 수정하기  	
+	public int updateBoard(SdboardDto sdboardDto);
+	
 	
 	//페이징 
 	public int getTotalBoard(SdboardDto sdboarddto);

@@ -113,6 +113,31 @@ public class SdboardDaoImpl implements SdboardDao{
 		
 		return boardlist;
 	}
+
+	@Override
+	public int updateImg(SdboardDto sdboardDto) {
+		logger.info("이미지 업데이트 dao dto: "+sdboardDto);
+		int res = 0; 
+		res = sqlSession.update(NAMESPACE+"updateImg",sdboardDto);
+		
+		return res;
+	}
+
+	@Override
+	public int updateNoImgBoard(SdboardDto sdboardDto) {
+		logger.info("updateNoImgBoard dao sdboardDto :"+sdboardDto);
+		int res = 0;
+		res = sqlSession.update(NAMESPACE+"updateNoImgBoard",sdboardDto);
+		return res;
+	}
+
+	@Override
+	public int updateBoard(SdboardDto sdboardDto) {
+		logger.info("updateBoard dao :"+sdboardDto);
+		int res =0;
+		res = sqlSession.update(NAMESPACE+"updateBoard",sdboardDto);
+		return res;
+	}
 	
 
 }

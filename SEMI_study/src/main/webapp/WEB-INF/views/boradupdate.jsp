@@ -11,32 +11,9 @@
 <link href="${pageContext.request.contextPath}/resources/CSS/summernote-lite.min.css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/resources/JS/summernote/summernote-lite.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/JS/summernote/summernote-ko-KR.min.js"></script>
-
-<script type="text/javascript">
-$(function () {
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/JS/boardupdate.js"></script>
 
 
-	$('#summernote').summernote({
-	    placeholder: 'Hello stand alone ui',
-	    tabsize: 2,
-	    height: 120,
-	    width:650,
-	    toolbar: [
-	      ['style', ['style']],
-	      ['font', ['bold', 'underline', 'clear']],
-	      ['color', ['color']],
-	      ['para', ['ul', 'ol', 'paragraph']],
-	      ['table', ['table']],
-	      ['insert', ['link', 'picture', 'video']],
-	      ['view', ['fullscreen', 'codeview', 'help']]
-	    ]
-	  });
-	
-	$('#summernote').summernote('code','${updatedto.sdubcontent}');
-
-	
-});
-</script>
 
 
 </head>
@@ -61,10 +38,16 @@ $(function () {
 <div style="margin-left: 40px; margin-top: 40px; margin-bottom: 40px;">
 글 보기 
 
-<form action="boardupdateres.do" method="post">
+<form action="boardupdateres.do" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="sdbseq" value="${updatedto.sdbseq }">
+	<input type="hidden" name="sduemail" value="${updatedto.sduemail }">
+	<input type="hidden" name="sdubcontent" >
+	
+	
+
 		<p>
 		<span>제목</span>
-		<span><input type="text" value="${ updatedto.sdbtitle}" name="sdbtitle"></span>
+		<span><input type="text" value="${ updatedto.sdbtitle}" name="sdbtitle" id="sdbtitle"></span>
 		</p>
 		<p>
 		<span>날짜</span>
@@ -81,9 +64,7 @@ $(function () {
 		<th>첨부 파일</th>
 		<td>첨부파일 목록 ~</td>
 		<td>
-			<input type="hidden" name="sdbfilename" value=null>
-			<input type="hidden" name="sdbfilpath" value=null>
-			<input type="button" value="첨부하기">
+			<input type="file" multiple="multiple" name="file" value="첨부하기">
 		</td>
 	</tr>
 	<tr>
@@ -94,7 +75,9 @@ $(function () {
 		</td>
 	</tr>
 </table>
-		<input type="submit" value="수정하기"/>
+		<input type="button" value="수정하기" onclick="AjaxFileUpdate();"/>
+		<input type="submit" style="display: none" id="submit" />
+		<input type="button" value="수정취소" onclick="location.href='board.do?sdbseq=${updatedto.sdbseq}'">
 		<input type="button" value="목록으로" onclick="location.href='boardlist.do'"/>
 </form>
 </div>
