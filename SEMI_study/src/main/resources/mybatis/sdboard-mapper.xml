@@ -53,7 +53,7 @@ where SDBSEQ =#{sdbseq}
 </update>
 
 <update id="updateBoard">
-update SDBOARD set SDBTITLE=#{sdbtitle},SDUBCONTENT=#{sdubcontent},SDBFILPATH=#{sdbfilpath},SDBIMGPATH=#{sdbimgpath},THUMBNAIL=#{thumbnail}, SDBREGDATE=#{sdbregdate}
+update SDBOARD set SDBTITLE=#{sdbtitle},SDUBCONTENT=#{sdubcontent},SDBFILPATH=#{sdbfilpath}, SDBREGDATE=SYSDATE
 where SDUEMAIL=#{sduemail} and SDBSEQ =#{sdbseq}
 </update>
 
@@ -63,7 +63,7 @@ where SDUEMAIL=#{sduemail} and SDBSEQ=#{sdbseq}
 </update>
 
 <update id="updateNoImgBoard">
-update SDBOARD set SDBTITLE=#{sdbtitle},SDUBCONTENT=#{sdubcontent},SDBFILPATH=#{sdbfilpath},SDBIMGPATH="",THUMBNAIL="", SDBREGDATE=#{sdbregdate}
+update SDBOARD set SDBTITLE=#{sdbtitle},SDUBCONTENT=#{sdubcontent},SDBFILPATH=#{sdbfilpath},SDBIMGPATH="",THUMBNAIL="", SDBREGDATE=SYSDATE
 where SDUEMAIL=#{sduemail} and SDBSEQ=#{sdbseq}
 </update>
 

@@ -39,9 +39,8 @@
 글 보기 
 
 <form action="boardupdateres.do" method="post" enctype="multipart/form-data">
-	<input type="hidden" name="sdbseq" value="${updatedto.sdbseq }">
-	<input type="hidden" name="sduemail" value="${updatedto.sduemail }">
-	<input type="hidden" name="sdubcontent" >
+	<input type="hidden" name="sdbseq" id="sdbseq" value="${updatedto.sdbseq }">
+	<input type="hidden" name="sduemail" id="sduemail" value="${updatedto.sduemail }">
 	
 	
 
@@ -53,7 +52,9 @@
 		<span>날짜</span>
 		<span>${updatedto.sdbregdate }</span>
 		</p>
-		<textarea id="summernote" name="sdubcontent"></textarea>
+		<textarea id="summernote" name="sdubcontent">
+		${updatedto.sdubcontent}
+		</textarea>
 	
 	
 	<table border="1">
@@ -64,7 +65,7 @@
 		<th>첨부 파일</th>
 		<td>첨부파일 목록 ~</td>
 		<td>
-			<input type="file" multiple="multiple" name="file" value="첨부하기">
+			<input type="file" multiple="multiple" name="file" value="첨부하기" onclick="warning();">
 		</td>
 	</tr>
 	<tr>
@@ -75,7 +76,7 @@
 		</td>
 	</tr>
 </table>
-		<input type="button" value="수정하기" onclick="AjaxFileUpdate();"/>
+		<input type="button" value="수정완료" onclick="AjaxFileUpdate();"/>
 		<input type="submit" style="display: none" id="submit" />
 		<input type="button" value="수정취소" onclick="location.href='board.do?sdbseq=${updatedto.sdbseq}'">
 		<input type="button" value="목록으로" onclick="location.href='boardlist.do'"/>

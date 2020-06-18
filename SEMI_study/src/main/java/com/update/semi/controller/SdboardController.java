@@ -462,24 +462,7 @@ public class SdboardController {
 		}
 	}
 	
-	/*
-	// 글 수정 res
-	@RequestMapping(value = "/boardupdateres.do", method = RequestMethod.POST)
-	public String boardupdateres(SdboardDto sdboarddto, Model model) {
 
-		int res = sdboardbiz.update(sdboarddto);
-
-		if (res > 0) {
-
-			SdboardDto updateres = sdboardbiz.selectOne(sdboarddto.getSdbseq());
-			model.addAttribute("updateres", updateres);
-
-			return "redirect:/board.do";
-		}
-
-		return "boardupdate";
-	}
-	*/
 	
 /////////////////////////////////////////////////////////
 	
@@ -508,12 +491,14 @@ public class SdboardController {
 
 	      // #1 유저id, 년, 월, 일 폴더 생성
 	      String id_ymdPath = "";
-	      SduserDto sduserDto = (SduserDto) session.getAttribute("login");
+	      SduserDto sduserDto = (SduserDto) session.getAttribute("member");
+	      logger.info("이메일 로그인세션에서 갖고오기 :"+sduserDto);
 	      if(sduserDto != null) {
 	         id = sduserDto.getSduemail();
 	         // id_ymdPath 파일 경로 설정 >>> 유져id/년/월/일 
 	         id_ymdPath = UploadFileUtils.calcPath(imgUploadPath, id);
 	      }
+	      logger.info("현재 아이디가 들어오나 ?"+id);
 
 	      // #2 파일 저장후 성공시 "view에서 불러올 경로 + 파일명" 배열에 담는다[썸내일 제외 원본이미지], 썸내일은 따로 "view에서 불러올 경로 + 파일명"을 String에 담는다. >> 향후 실패 처리시를 만들어야함
 	      String[] imgNameArr = new String[fileArr.length];
@@ -541,6 +526,7 @@ public class SdboardController {
 	      }
 	      // #3 DB저장 (id, 시퀀스_pk, 썸네일이미지명, 이미지명) 저장
 	      sdboardDto.setSduemail(id);
+	      logger.info("로그인의 값을 담은 뒤의dto"+sdboardDto);
 	      sdboardDto.setSdbseq(sdbseq);
 	      sdboardDto.setThumbnail(thumbImgName);
 	      String imgNames = "";
@@ -587,7 +573,7 @@ public class SdboardController {
 	      logger.info("board Update Res >>>>>>>>>>>>>>>>>>>>> " + sdboardDto);
 	      
 	      // #1 세션에서 id(=email) 찾기
-	      SduserDto sduserDto = (SduserDto) session.getAttribute("login");
+	      SduserDto sduserDto = (SduserDto) session.getAttribute("member");
 	      String id = "";
 	      if(sduserDto != null) {
 	         id = sduserDto.getSduemail();
@@ -626,6 +612,7 @@ public class SdboardController {
 	      
 	      // content 안에 img태그가 없을 경우 >>> DB 이미지 썸내일 칼럼 삭제
 	      if(!Util.isImgTag(sdboardDto.getSdubcontent())) {
+	    	  logger.info("content안에 img 태그 없는 경우");
 	         int noImgUpdateRes = sdboardbiz.updateNoImgBoard(sdboardDto);
 	         if(noImgUpdateRes > 0) {
 	            logger.info("board Update Res >>>>>>>>>>>>>>>> [No img 수정 성공] Board update success");
@@ -635,7 +622,8 @@ public class SdboardController {
 	            return "redirect:/boardupdate.do";
 	         }
 	      } else {
-	         // 이미지 있을경우 DB 수정 
+	         // 이미지 있을경우 DB 수정
+	    	 logger.info("content안에 img 태그 있는 경우");
 	         SdboardDto oldBoardDto = sdboardbiz.selectOne(sdboardDto.getSdbseq());
 	         logger.info("xxxxxxxxxxxxxxxxxx>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + oldBoardDto);
 	         int res = sdboardbiz.updateBoard(sdboardDto);

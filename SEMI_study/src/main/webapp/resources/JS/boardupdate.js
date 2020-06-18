@@ -21,6 +21,7 @@ function createSummernote(){
             ['Misc',['undo','redo']]
         ]
   });
+   //$('#summernote').summernote('code','${updatedto.sdubcontent}');
 }
 
 /*
@@ -50,6 +51,7 @@ function createSummernote(){
 //1. $(document).ready() 로딩 1순위
 document.addEventListener("DOMContentLoaded", function(){   //  == $(document).ready(function() {}
    createSummernote()
+   console.log("summernote 로딩")
 });
 
 //2. $(document).ready() 로딩 2순위
@@ -148,7 +150,7 @@ function AjaxFileUpdate(){   // fileList 파일 배열
       for(let i = 0; i<fileList.length; i++){                           // 전송용객체에 데이터를 담는다.
          formDate.append("fileArr", fileList[i]);   
       }
-      let boardNo = document.getElementById("sdbseq").value
+      let sdbseq = document.getElementById("sdbseq").value
       formDate.append("sdbseq", sdbseq);   // 업데이트를 위해 pk를 추가
       
       console.log("4) AjaxFileUpdate >>>>> input : " + formDate);
@@ -193,7 +195,7 @@ function AjaxFileUpdate(){   // fileList 파일 배열
                if(cnt < 3){
                   cnt++
                   console.log("재실행) AjaxFileUpdate >>>>>> cnt : " + cnt)
-                  AjaxFileUpload()
+                  AjaxFileUpdate()
                } else {
                   alert("서비스 문제로 저장 실패 관리자에게 요청하세요.")
                }
@@ -226,7 +228,7 @@ function AjaxFileUpdate(){   // fileList 파일 배열
 //이미지 변환 : base64 >> new File(데이터, 이름 , 타입)
 const dataURLtoFile = (dataurl, fileName) => {
     var arr = dataurl.split(',') 
-    var   mime = arr[0].match(/:(.*?);/)[1]   // base64에서 미디어 타입을 가져온다. 
+    var  mime = arr[0].match(/:(.*?);/)[1]   // base64에서 미디어 타입을 가져온다. 
     var fileType = mime.split("/")[1]      // 확장자 가져오기
     var   bstr = atob(arr[1])             // 미디어 타입이 제거된 base64코드를 가져와서 16진수 byte코드로 변환한다.
                                   // atob("ASCII to binary") base64로 인코딩 된 문자열을 디코딩 : base64문자열(==16진수 byte) >> 8진수 byte
